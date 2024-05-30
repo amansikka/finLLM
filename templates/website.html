@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Drag and Drop</title>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .container {
+        width: 80%;
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #pdf-drop-area {
+    width: 100%;
+    margin: 20px 0;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px dashed #ccc;
+    position: relative; /* Ensure positioning context */
+    }
+
+    #file-info {
+        position: absolute;
+        top: 30px; /* Position it below the label */
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+    }
+    #drop-area.hover, #pdf-drop-area.hover {
+        border-color: #333;
+    }
+    h2, h3, p {
+        text-align: center;
+    }
+    p {
+        width: 80%;
+    }
+    textarea {
+        width: 80%;
+        height: 50px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        resize: none; /* Prevents resizing, remove if resize is desired */
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>FinLLM</h2>
+    <div id="info-section">
+        <h3>By Aman Sikka</h3>
+        <p>This is a finance chatbot that takes annual reports and earnings calls and sifts through them to answer finance question prompts</p>
+    </div>
+
+    <div id="pdf-drop-area">
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="pdf" style="display: none;" id="pdfElem" accept="application/pdf">
+            <label for="pdfElem" id="labelForPdfElem">Upload PDF or drag here</label>
+            <div id="file-info" style="margin-top: 10px;"></div> 
+        </form>
+    </div>
+
+    <textarea id="chatInput" placeholder="Type your prompt here..." oninput="autoResize(this)"></textarea>
+    
+    <button type="button" id="submitButton">Enter</button>
+</div>
+<script src="dragdrop.js"></script>
+<script>
+function autoResize(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+}
+</script>
+</body>
+</html>
